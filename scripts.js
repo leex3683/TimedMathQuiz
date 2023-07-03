@@ -59,7 +59,8 @@ goBack.addEventListener("click", function(event) {
 
 bodyEl.addEventListener("click", function (event) {
     let element = event.target;
-   
+    headerEl.appendChild(aside1El).textContent = "View High Scores";
+    headerEl.appendChild(aside2El).textContent = "remaining Time: " + timer;
     if (element.getAttribute("id") == "start") {
         //Clear Start Page
         document.getElementById("instructions").remove();
@@ -67,6 +68,8 @@ bodyEl.addEventListener("click", function (event) {
         document.getElementById("desc").remove();
         //Start Timer
         var timerInterval = setInterval(() => {
+            headerEl.appendChild(aside1El).textContent = "View High Scores";
+            headerEl.appendChild(aside2El).textContent = "remaining Time: " + timer;
             if (timer > 0) {
                 timer = timer - 1;
             } else {
@@ -74,8 +77,7 @@ bodyEl.addEventListener("click", function (event) {
                 return gameOver();
                 timer = 0;
             }
-            headerEl.appendChild(aside1El).textContent = "View High Scores";
-            headerEl.appendChild(aside2El).textContent = "remaining Time: " + timer;
+
         }, 1000);
         //Start Quiz
         return Quiz(0);
