@@ -6,14 +6,16 @@ body {
     padding: 4%;
     width: 84%;
     border: solid;
+    font-size: 30px;
 }
 
 start {
-    margin: 4%;
-    padding: 4%;
+    margin: 2%;
+    padding: 2%;
     width: 30%;
     background-color:rgb(195, 195, 195);
     border-radius: 20px; 
+    font-size: 20px;
 }
 
 header {
@@ -23,14 +25,24 @@ header {
 }
 
 section div {
-    margin: 4%;
-    padding: 4%;
+    margin: 2%;
+    padding: 2%;
     width: 30%;
     background-color:rgb(195, 195, 195);
     border-radius: 20px;
+    font-size: 20px;
 }
 
 .result{
     border-top: solid;
+    font-size: 30px;
+}
+
+input {
+    margin: 4%;
+    padding: 4%;
+    width: 30%;
+    background-color:rgb(255, 255, 255);
+    border-radius: 20px;
     font-size: 30px;
 }

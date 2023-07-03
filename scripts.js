@@ -11,7 +11,11 @@ let divEl2 = document.createElement("div");
 let divEl3 = document.createElement("div");
 let divEl4 = document.createElement("div");
 let SectionElres = document.createElement("section");
+let inputEl = document.createElement("input");
+
 let i = 0;
+let score = 0;
+
 
 bodyEl.addEventListener("click", function (event) {
     let element = event.target;
@@ -20,13 +24,22 @@ bodyEl.addEventListener("click", function (event) {
         document.getElementById("instructions").remove();
         document.getElementById("start").remove();
         document.getElementById("desc").remove();
+
         return Quiz(0);
+    } else if (element.getAttribute("data-number") == j) {
+        score = score + 10;
+        i++;
+        if (i == 5) {
+            return gameOver();
+        } else {
+            return Quiz(i);
+        }
     }
 });
 
 function Quiz(i) {
-    console.log(i);
-    j = Math.floor(Math.random() * 100);  
+    // console.log(i);
+    j = Math.floor(Math.random() * 100);
     divEl1.setAttribute("data-number", i + Math.floor(Math.random() * 100));
     divEl2.setAttribute("data-number", i + Math.floor(Math.random() * 100));
     divEl3.setAttribute("data-number", i + Math.floor(Math.random() * 100));
@@ -42,20 +55,30 @@ function Quiz(i) {
     sectionEl.appendChild(divEl3).textContent = quiz[i].a3;
     sectionEl.appendChild(divEl4).textContent = quiz[i].a4;
     quiz[i].ca.setAttribute("data-number", j);
+ 
+    // bodyEl.addEventListener("click", function (event) {
+    //     let element = event.target;
+        // if (element.getAttribute("data-number") == j) {
+        //     i++;
+        //     if (i == 5) {
 
-
-    bodyEl.addEventListener("click", function (event) {
-        let element = event.target;
-
-
-        if (element.getAttribute("data-number") == j) {
-            i++;
-            return Quiz(i);
-        }
-    });
+        //     } else {
+        //         return Quiz(i);
+        //     }
+        // }
+    // });
 
 }
 
+function gameOver(){
+    h1El.textContent = "Complete. Your score is: " + score +". Please enter your initials below.";
+    sectionEl.remove();
+    bodyEl.appendChild(inputEl)
+    inputEl.setAttribute("type","text");
+    inputEl.setAttribute("name","score");
+    inputEl.setAttribute("id","score");
+    inputEl.setAttribute("placeholder","Enter your score");
+}
 
 //Quiz is an array object. Each array item contains a q and 4 answers.
 let quiz = [
