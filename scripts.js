@@ -71,6 +71,7 @@ bodyEl.addEventListener("click", function (event) {
                 timer = timer - 1;
             } else {
                 clearInterval(timerInterval);
+                return gameOver();
                 timer = 0;
             }
             headerEl.appendChild(aside1El).textContent = "View High Scores";
