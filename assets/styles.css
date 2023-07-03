@@ -39,10 +39,31 @@ section div {
 }
 
 input {
-    margin: 4%;
-    padding: 4%;
+    margin: 2%;
+    padding: 2%;
     width: 30%;
     background-color:rgb(255, 255, 255);
     border-radius: 20px;
-    font-size: 30px;
+    font-size: 20px;
+}
+
+button {
+    margin: 2%;
+    padding: 2%;
+    width: 30%;
+    background-color:rgb(195, 195, 195);
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+#sS {
+    display: flex;
+    flex-direction: row wrap;
+    background-color: rgb(195, 195, 195);
+    border: solid 1px;
+}
+
+#sS div {
+    background-color: rgb(255, 255, 255);
+    border-radius: 0;
 }
