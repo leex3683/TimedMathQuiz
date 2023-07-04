@@ -16,7 +16,9 @@ let SectionElres = document.createElement("section");
 SectionElres.setAttribute("id", "result");
 let inputEl = document.createElement("input");
 let scoreSave = document.createElement("button");
-let h = 0;
+let j = 0;
+let h = localStorage.getItem("h");
+
 scoreSave.setAttribute("id", "save");
 let goBack = document.createElement("button");
 goBack.setAttribute("id", "back");
@@ -32,7 +34,13 @@ let score = 0;
 let timer = 60;
 
 scoreSave.addEventListener("click", function (event) {
-    h++;
+    if (h == null) { 
+        h = 1; 
+    }
+    else {
+        h++;
+    }
+    localStorage.setItem("h", h);
     localStorage.setItem("initials" + h, inputEl.value);
     localStorage.setItem("score" + h, score);
     // viewHighScoresI.push(localStorage.getItem("initials"));
