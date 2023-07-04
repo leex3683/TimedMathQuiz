@@ -13,9 +13,10 @@ let divEl2 = document.createElement("div");
 let divEl3 = document.createElement("div");
 let divEl4 = document.createElement("div");
 let SectionElres = document.createElement("section");
+SectionElres.setAttribute("id", "result");
 let inputEl = document.createElement("input");
 let scoreSave = document.createElement("button");
-
+let h = 0;
 scoreSave.setAttribute("id", "save");
 let goBack = document.createElement("button");
 goBack.setAttribute("id", "back");
@@ -30,35 +31,35 @@ let i = 0;
 let score = 0;
 let timer = 60;
 
-scoreSave.addEventListener("click", function(event){
-
-localStorage.setItem("initials", inputEl.value);
-localStorage.setItem("score", score);
-viewHighScoresI.push(localStorage.getItem("initials"));
-viewHighScoresS.push(localStorage.getItem("score"));
-return scoreScreen();
+scoreSave.addEventListener("click", function (event) {
+    h++;
+    localStorage.setItem("initials" + h, inputEl.value);
+    localStorage.setItem("score" + h, score);
+    // viewHighScoresI.push(localStorage.getItem("initials"));
+    // viewHighScoresS.push(localStorage.getItem("score"));
+    return scoreScreen();
 
 })
 
-goBack.addEventListener("click", function(event) {
+goBack.addEventListener("click", function (event) {
     i = 0;
     timer = 60;
     progress = "";
     score = 0;
     h1El.textContent = "Quiz Challenge";
-    h1El.setAttribute("id","desc")
+    h1El.setAttribute("id", "desc")
     bodyEl.appendChild(pEl).textContent = "Answer as many questions as you can before the timer runs out. Incorrect answers will dedcuct seconds from the clock, so be quick and accurate to achieve a high score. Good Luck!";
-    pEl.setAttribute("id","instructions");
+    pEl.setAttribute("id", "instructions");
     bodyEl.appendChild(startEl).textContent = "Start";
-    startEl.setAttribute("id","start");
+    startEl.setAttribute("id", "start");
     inputEl.remove();
     scoreSave.remove();
     goBack.remove();
 
 })
 
-aside1El.addEventListener("click",function(event) {
- gameOver();
+aside1El.addEventListener("click", function (event) {
+    gameOver();
 })
 
 bodyEl.addEventListener("click", function (event) {
@@ -71,7 +72,7 @@ bodyEl.addEventListener("click", function (event) {
         document.getElementById("start").remove();
         document.getElementById("desc").remove();
         //Start Timer
-        var timerInterval = setInterval(() => {
+        let timerInterval = setInterval(() => {
             headerEl.appendChild(aside1El).textContent = "Quit with current score";
             headerEl.appendChild(aside2El).textContent = "remaining Time: " + timer;
             if (timer > 0) {
@@ -89,6 +90,7 @@ bodyEl.addEventListener("click", function (event) {
         score = score + 10;
         i++;
         progress = progress + " | " + i + ") Correct";
+        SectionElres.textContent = "CORRECT";
         if (i == 5) {
             return gameOver();
         } else {
@@ -97,6 +99,7 @@ bodyEl.addEventListener("click", function (event) {
     } else if (element.getAttribute("data-number") !== null) {
         i++;
         progress = progress + " | " + i + ") Incorrect ";
+        SectionElres.textContent = "WRONG";
         score = score - 20;
         timer = timer - 10;
         if (i == 5) {
@@ -107,7 +110,21 @@ bodyEl.addEventListener("click", function (event) {
             return Quiz(i);
         }
     }
+
 });
+
+
+
+function fade(x) {
+    let timerInterval = setInterval(() => {
+        if (x.style.opacity > 0) {
+            x.style.opacity = x.style.opacity - .1;
+        } else
+
+            clearInterval(timerInterval);
+
+    }, 50)
+}
 
 function Quiz(i) {
     // console.log(i);
@@ -129,7 +146,7 @@ function Quiz(i) {
 }
 
 function gameOver() {
-    timer= 0;
+    timer = 0;
     h1El.textContent = "Complete. Your score is: " + score + ". Please enter your initials below.";
     sectionEl.remove();
     bodyEl.appendChild(inputEl);
@@ -139,26 +156,38 @@ function gameOver() {
     inputEl.setAttribute("name", "score");
     inputEl.setAttribute("id", "score");
     inputEl.setAttribute("placeholder", "Enter your initials");
-    SectionElres.remove();   
-    headerEl.remove(); 
+    SectionElres.remove();
+    headerEl.remove();
 }
 
-function scoreScreen(){
+function scoreScreen() {
     h1El.textContent = "Scores Screen:";
-    h1El.setAttribute("id","desc")
+    h1El.setAttribute("id", "desc")
     bodyEl.appendChild(pEl).textContent = "How'd you do?";
-    pEl.setAttribute("id","instructions");
- 
+    pEl.setAttribute("id", "instructions");
 
-for (n = 0; n< viewHighScoresI.length;n++){
-    let sS = document.createElement('section');
-    sS.setAttribute("id", "sS");
-    pEl.appendChild(sS);
-    let initS = document.createElement("div");
-    let scoreS = document.createElement("div");
-    sS.appendChild(initS).textContent = viewHighScoresI[n];
-    sS.appendChild(scoreS).textContent = viewHighScoresS[n];
-}
+
+    for (n = 0; n < h + 1; n++) {
+
+        if (n == 0) {
+            let sS = document.createElement('section');
+            sS.setAttribute("id", "sS");
+            pEl.appendChild(sS);
+            let initS = document.createElement("div");
+            let scoreS = document.createElement("div");
+            sS.appendChild(initS).textContent = "Initials";
+            sS.appendChild(scoreS).textContent = "Score";
+        } else {
+
+            let sS = document.createElement('section');
+            sS.setAttribute("id", "sS");
+            pEl.appendChild(sS);
+            let initS = document.createElement("div");
+            let scoreS = document.createElement("div");
+            sS.appendChild(initS).textContent = localStorage.getItem("initials" + n);
+            sS.appendChild(scoreS).textContent = localStorage.getItem("score" + n);;
+        }
+    }
 
     bodyEl.appendChild(goBack).textContent = "Go Back";
     goBack.setAttribute("id", "back");
