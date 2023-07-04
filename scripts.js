@@ -57,9 +57,13 @@ goBack.addEventListener("click", function(event) {
 
 })
 
+aside1El.addEventListener("click",function(event) {
+ gameOver();
+})
+
 bodyEl.addEventListener("click", function (event) {
     let element = event.target;
-    headerEl.appendChild(aside1El).textContent = "View High Scores";
+    headerEl.appendChild(aside1El).textContent = "Quit with current score";
     headerEl.appendChild(aside2El).textContent = "remaining Time: " + timer;
     if (element.getAttribute("id") == "start") {
         //Clear Start Page
@@ -68,7 +72,7 @@ bodyEl.addEventListener("click", function (event) {
         document.getElementById("desc").remove();
         //Start Timer
         var timerInterval = setInterval(() => {
-            headerEl.appendChild(aside1El).textContent = "View High Scores";
+            headerEl.appendChild(aside1El).textContent = "Quit with current score";
             headerEl.appendChild(aside2El).textContent = "remaining Time: " + timer;
             if (timer > 0) {
                 timer = timer - 1;
@@ -130,12 +134,13 @@ function gameOver() {
     sectionEl.remove();
     bodyEl.appendChild(inputEl);
     bodyEl.appendChild(scoreSave).textContent = "Save Score";
-    bodyEl.appendChild(goBack).textContent = "Go Back";
+    // bodyEl.appendChild(goBack).textContent = "Go Back";
     inputEl.setAttribute("type", "text");
     inputEl.setAttribute("name", "score");
     inputEl.setAttribute("id", "score");
     inputEl.setAttribute("placeholder", "Enter your initials");
-    SectionElres.remove();    
+    SectionElres.remove();   
+    headerEl.remove(); 
 }
 
 function scoreScreen(){
