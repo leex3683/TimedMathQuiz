@@ -16,6 +16,7 @@ let SectionElres = document.createElement("section");
 SectionElres.setAttribute("id", "result");
 let inputEl = document.createElement("input");
 let scoreSave = document.createElement("button");
+let ClearScores = document.createElement("button");
 let j = 0;
 let h = localStorage.getItem("h");
 
@@ -63,8 +64,16 @@ goBack.addEventListener("click", function (event) {
     inputEl.remove();
     scoreSave.remove();
     goBack.remove();
+    ClearScores.remove();
 
 })
+
+ClearScores.addEventListener("click", function(event){
+    h = 0;
+    localStorage.clear();
+    return scoreScreen();
+})
+
 
 aside1El.addEventListener("click", function (event) {
     gameOver();
@@ -173,7 +182,8 @@ function scoreScreen() {
     h1El.setAttribute("id", "desc")
     bodyEl.appendChild(pEl).textContent = "How'd you do?";
     pEl.setAttribute("id", "instructions");
-
+    inputEl.remove();
+    scoreSave.remove();
 
     for (n = 0; n < h + 1; n++) {
 
@@ -198,9 +208,9 @@ function scoreScreen() {
     }
 
     bodyEl.appendChild(goBack).textContent = "Go Back";
+    bodyEl.appendChild(ClearScores).textContent = "Clear Scores";
     goBack.setAttribute("id", "back");
-    inputEl.remove();
-    scoreSave.remove();
+
 }
 
 //Quiz is an array object. Each array item contains a q and 4 answers.
