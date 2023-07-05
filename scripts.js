@@ -175,9 +175,11 @@ function gameOver() {
     inputEl.setAttribute("placeholder", "Enter your initials");
     SectionElres.remove();
     headerEl.remove();
+    bodyEl.appendChild(SectionElres).textContent = progress;
 }
 
 function scoreScreen() {
+    SectionElres.remove();
     h1El.textContent = "Scores Screen:";
     h1El.setAttribute("id", "desc")
     bodyEl.appendChild(pEl).textContent = "How'd you do?";
